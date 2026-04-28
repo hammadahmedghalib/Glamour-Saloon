@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glamour Salon</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#0a0a0a;color:white;}
+
+/* NAV */
+nav{
+display:flex;justify-content:space-between;
+padding:20px 50px;background:#000;
+}
+nav h1{color:gold;}
+
+/* HERO */
+.hero{
+height:80vh;
+background:url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438') center/cover;
+display:flex;align-items:center;justify-content:center;
+text-align:center;
+}
+.hero h1{font-size:50px;color:gold;}
+
+.btn{
+padding:10px 20px;
+background:gold;color:black;border:none;
+cursor:pointer;margin-top:10px;
+}
+
+/* SERVICES */
+.services{padding:60px;text-align:center;}
+.services h2{color:gold;margin-bottom:30px;}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.card{
+background:#111;padding:25px;
+border-radius:10px;
+cursor:pointer;
+transition:0.3s;
+}
+.card:hover{transform:translateY(-8px);background:#1a1a1a;}
+
+/* PANEL */
+.panel{
+position:fixed;
+right:-100%;
+top:0;
+width:350px;
+height:100%;
+background:#111;
+padding:25px;
+transition:0.4s;
+overflow-y:auto;
+}
+.panel.active{right:0;}
+
+.close{
+cursor:pointer;
+color:red;
+float:right;
+}
+
+.panel h2{color:gold;margin-bottom:10px;}
+.panel ul{margin-bottom:20px;}
+.panel li{margin:8px 0;}
+
+input,select{
+width:100%;
+padding:10px;
+margin:8px 0;
+border:none;border-radius:5px;
+}
+
+/* WHATSAPP */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:15px;
+border-radius:50%;
+font-size:20px;
+cursor:pointer;
+}
+
+.testimonials{
+padding:60px;
+text-align:center;
+}
+
+.review{
+background:#111;
+margin:10px auto;
+padding:15px;
+max-width:500px;
+border-radius:10px;
+}
+
+.stats{
+display:flex;
+justify-content:space-around;
+padding:40px;
+background:#111;
+text-align:center;
+}
+
+
+
+/* FOOTER */
+footer{text-align:center;padding:20px;background:#000;margin-top:40px;}
+</style>
+</head>
+
+<body>
+
+<nav>
+<h1>Glamour Salon</h1>
+</nav>
+
+<section class="hero">
+<div>
+<h1>Premium Grooming</h1>
+<button class="btn" onclick="openPanel('hair')">Explore Services</button>
+</div>
+</section>
+
+<section class="stats">
+<div>🔥 500+ Clients</div>
+<div>✂️ 1200+ Haircuts</div>
+<div>⭐ 5 Star Rating</div>
+</section>
+
+<section class="services">
+<h2>Our Services</h2>
+
+<div class="grid">
+<div class="card" onclick="openPanel('hair')">💇 Hair Services</div>
+<div class="card" onclick="openPanel('beard')">🧔 Beard Grooming</div>
+<div class="card" onclick="openPanel('skin')">🧖 Skin Care</div>
+<div class="card" onclick="openPanel('spa')">💆 Spa</div>
+<div class="card" onclick="openPanel('extra')">💅 Additional</div>
+</div>
+</section>
+
+
+
+<!-- PANEL -->
+<div class="panel" id="panel">
+<span class="close" onclick="closePanel()">✖</span>
+
+<h2 id="title"></h2>
+<ul id="list"></ul>
+
+<h3>Book Appointment</h3>
+<input placeholder="Your Name" id="name">
+<input placeholder="Phone Number" id="phone">
+
+<select id="serviceSelect">
+<option>Select Service</option>
+</select>
+
+<button class="btn" onclick="bookNow()">Confirm Booking</button>
+</div>
+
+<!-- WHATSAPP -->
+<div class="whatsapp" onclick="bookNow()">💬</div>
+
+<section class="testimonials">
+<h2>What Clients Say</h2>
+
+<div class="review">
+⭐ “Best salon in Islamabad! Amazing fade.” - Ali
+</div>
+
+<div class="review">
+⭐ “Very professional staff and clean setup.” - Hassan
+</div>
+
+<div class="review">
+⭐ “Loved my facial experience.” - Ahmed
+</div>
+
+</section>
+
+<section class="map">
+<h2 style="text-align:center;color:gold;">Our Location</h2>
+
+<iframe
+src="https://www.google.com/maps?q=Islamabad&output=embed"
+width="100%"
+height="300"
+style="border:0;">
+</iframe>
+
+<button class="btn" onclick="openDirections()">
+📍 Get Directions
+</button>
+
+</section>
+
+<footer>
+© 2026 Glamour Salon
+</footer>
+
+<script>
+
+const data = {
+
+hair:{
+title:"Hair Services",
+items:[
+"Haircuts (fade, taper, skin fade) - Rs.500",
+"Hair styling - Rs.300",
+"Hair coloring - Rs.1500",
+"Straightening - Rs.2000",
+"Hair wash - Rs.200",
+"Keratin - Rs.4000"
+]
+},
+
+beard:{
+title:"Beard & Grooming",
+items:[
+"Beard trimming - Rs.300",
+"Beard styling - Rs.400",
+"Clean shave - Rs.250",
+"Hot towel shave - Rs.500",
+"Beard coloring - Rs.800"
+]
+},
+
+skin:{
+title:"Skin Care",
+items:[
+"Facial - Rs.1500",
+"Deep cleansing - Rs.1200",
+"Whitening facial - Rs.2000",
+"Blackhead removal - Rs.800",
+"Detan treatment - Rs.1500"
+]
+},
+
+spa:{
+title:"Spa",
+items:[
+"Head massage - Rs.500",
+"Shoulder massage - Rs.700",
+"Full body massage - Rs.3000",
+"Steam therapy - Rs.600"
+]
+},
+
+extra:{
+title:"Additional",
+items:[
+"Manicure - Rs.800",
+"Pedicure - Rs.1000",
+"Waxing - Rs.700",
+"Groom package - Rs.5000"
+]
+}
+
+};
+
+function openPanel(type){
+document.getElementById("panel").classList.add("active");
+
+document.getElementById("title").innerText = data[type].title;
+
+let list="";
+let options="<option>Select Service</option>";
+
+data[type].items.forEach(item=>{
+list += `<li>${item}</li>`;
+options += `<option value="${item}">${item}</option>`;
+});
+
+document.getElementById("list").innerHTML = list;
+document.getElementById("serviceSelect").innerHTML = options;
+}
+
+function closePanel(){
+document.getElementById("panel").classList.remove("active");
+}
+
+function bookNow(){
+
+let name = document.getElementById("name").value;
+let phone = document.getElementById("phone").value;
+let service = document.getElementById("serviceSelect").value;
+
+let message = `Hello, I want to book an appointment:%0A
+Name: ${name}%0A
+Phone: ${phone}%0A
+Service: ${service}`;
+
+window.open(`https://wa.me/923359635567?text=${message}`, "_blank");
+}
+
+function openDirections(){
+window.open("https://www.google.com/maps/dir/?api=1&destination=Islamabad+Pakistan","_blank");
+}
+
+</script>
+
+</body>
+</html>
