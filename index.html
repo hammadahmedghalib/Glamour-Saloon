@@ -21,7 +21,7 @@ nav h1{color:gold;}
 /* HERO */
 .hero{
 height:80vh;
-background:url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438') center/cover;
+background:url('https://wallpaperaccess.com/full/10469249.jpg') center/cover;
 display:flex;align-items:center;justify-content:center;
 text-align:center;
 }
@@ -116,6 +116,54 @@ background:#111;
 text-align:center;
 }
 
+.tiktok-float {
+    position: fixed;
+    bottom: 90px; /* above WhatsApp */
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    background: #000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255,0,80,0.6);
+    transition: 0.3s;
+    z-index: 999;
+}
+
+.tiktok-float img {
+    width: 28px;
+}
+
+.tiktok-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(0,255,255,0.8);
+}
+.location-float {
+    position: fixed;
+    bottom: 160px; /* above TikTok button */
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    background: #ffcc00;
+    color: #000;
+    font-size: 22px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255,204,0,0.7);
+    transition: 0.3s;
+    z-index: 999;
+}
+
+.location-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(255,204,0,1);
+}
 
 
 /* FOOTER */
@@ -197,16 +245,7 @@ footer{text-align:center;padding:20px;background:#000;margin-top:40px;}
 <section class="map">
 <h2 style="text-align:center;color:gold;">Our Location</h2>
 
-<iframe
-src="https://www.google.com/maps?q=Islamabad&output=embed"
-width="100%"
-height="300"
-style="border:0;">
-</iframe>
 
-<button class="btn" onclick="openDirections()">
-📍 Get Directions
-</button>
 
 </section>
 
@@ -310,10 +349,19 @@ window.open(`https://wa.me/923359635567?text=${message}`, "_blank");
 }
 
 function openDirections(){
-window.open("https://www.google.com/maps/dir/?api=1&destination=Islamabad+Pakistan","_blank");
+window.open("https://maps.app.goo.gl/gEDAgx2FrW4L8WC29","_blank");
 }
 
+function openTikTok(){
+window.open("https://www.tiktok.com/@glamour_salon_isb?_r=1&_t=ZS-95vKjv5mh9z","_blank");
+}
 </script>
+<div class="tiktok-float" onclick="openTikTok()">
+    <img src="https://cdn-icons-png.flaticon.com/512/3046/3046126.png" alt="TikTok">
+</div>
 
+<div class="location-float" onclick="openLocation()">
+    📍
+</div>
 </body>
 </html>
